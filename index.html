@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang=""en"><head>  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>tlas — Navigate Software Like Google Maps</title>title>
+  <meta name="description" content="Atlas transforms GitHub repositories into interactive visual galaxies. Navigate architecture, call graphs, git history, security hotspots and AI explanations in real time.">
+  
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>head>
+<body>
+  <!-- Background Space Canvas (Active on Home, and behind dashboard) -->
+  <canvas id="space-canvas">/canvas>
+
+  <!-- 1. LANDING/HOME VIEW -->
+  <div id="home-view" class="view active">    <header class="home-header">      <div class="logo">        <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10">/circle>
+          <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20">/path>
+          <path d="M2 12h20"></path>path>
+        </path>svg>
+        <span>TLAS</span>span>
+      </circle>div>
+      <div class="header-links">        <a href="https://github.com" target="_blank" class="text-link">ocs</a>a>
+        <a href="https://github.com" target="_blank" class="text-link">GitHub</a>a>
+      </div>div>
+    </svg>header>
+
+    <main class="home-main">      <div class="hero-section animate-fade-in">        <span class="badge">1.0 VISUAL CODE INTELLIGENCE</span>span>
+        <h1>avigate Software Like Google Maps</h1>h1>
+        <p class="hero-pitch">          Atlas transforms any GitHub repository into an interactive digital universe. Explore architecture, runtime execution flow, dependency metrics, and git history in real time.
+        </p>p>
+
+        <!-- Repo URL Input / Search -->
+        <div class="url-input-container">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>line>
+          </svg>svg>
+          <input type="text" id="repo-url-input" placeholder="Paste GitHub Repository URL (e.g. https://github.com/facebook/react)..." />
+          <button id="analyze-btn">Analyze Repository</button>button>
+        </div>div>
+
+        <div class="quick-examples">          <span>r try:</span>span>
+          <button class="example-chip" data-url="https://github.com/facebook/react">acebook/react</button>button>
+          <button class="example-chip" data-url="https://github.com/expressjs/express">expressjs/express</button>button>
+          <button class="example-chip" data-url="https://github.com/microsoft/vscode">microsoft/vscode</button>button>
+        </div>div>
+      </div>div>
