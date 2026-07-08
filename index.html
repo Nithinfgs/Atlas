@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html lang=""en"><head>  <meta charset="UTF-8">
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>tlas — Navigate Software Like Google Maps</title>title>
+  <title>Atlas — Navigate Software Like Google Maps</title>
   <meta name="description" content="Atlas transforms GitHub repositories into interactive visual galaxies. Navigate architecture, call graphs, git history, security hotspots and AI explanations in real time.">
   
   <!-- Typography -->
@@ -11,42 +13,1030 @@
   
   <!-- Main Stylesheet -->
   <link rel="stylesheet" href="styles.css">
-</head>head>
+</head>
 <body>
+
   <!-- Background Space Canvas (Active on Home, and behind dashboard) -->
-  <canvas id="space-canvas">/canvas>
+  <canvas id="space-canvas"></canvas>
 
   <!-- 1. LANDING/HOME VIEW -->
-  <div id="home-view" class="view active">    <header class="home-header">      <div class="logo">        <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="12" cy="12" r="10">/circle>
-          <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20">/path>
-          <path d="M2 12h20"></path>path>
-        </path>svg>
-        <span>TLAS</span>span>
-      </circle>div>
-      <div class="header-links">        <a href="https://github.com" target="_blank" class="text-link">ocs</a>a>
-        <a href="https://github.com" target="_blank" class="text-link">GitHub</a>a>
-      </div>div>
-    </svg>header>
+  <div id="home-view" class="view active">
+    <header class="home-header">
+      <div class="logo">
+        <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
+          <path d="M2 12h20"></path>
+        </svg>
+        <span>ATLAS</span>
+      </div>
+      <div class="header-links">
+        <a href="https://github.com" target="_blank" class="text-link">Docs</a>
+        <a href="https://github.com" target="_blank" class="text-link">GitHub</a>
+      </div>
+    </header>
 
-    <main class="home-main">      <div class="hero-section animate-fade-in">        <span class="badge">1.0 VISUAL CODE INTELLIGENCE</span>span>
-        <h1>avigate Software Like Google Maps</h1>h1>
-        <p class="hero-pitch">          Atlas transforms any GitHub repository into an interactive digital universe. Explore architecture, runtime execution flow, dependency metrics, and git history in real time.
-        </p>p>
+    <main class="home-main">
+      <div class="hero-section animate-fade-in">
+        <span class="badge">V1.0 VISUAL CODE INTELLIGENCE</span>
+        <h1>Navigate Software Like Google Maps</h1>
+        <p class="hero-pitch">
+          Atlas transforms any GitHub repository into an interactive digital universe. Explore architecture, runtime execution flow, dependency metrics, and git history in real time.
+        </p>
 
         <!-- Repo URL Input / Search -->
         <div class="url-input-container">
           <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="11" cy="11" r="8"></circle>circle>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>line>
-          </svg>svg>
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
           <input type="text" id="repo-url-input" placeholder="Paste GitHub Repository URL (e.g. https://github.com/facebook/react)..." />
-          <button id="analyze-btn">Analyze Repository</button>button>
-        </div>div>
+          <button id="analyze-btn">Analyze Repository</button>
+        </div>
 
-        <div class="quick-examples">          <span>r try:</span>span>
-          <button class="example-chip" data-url="https://github.com/facebook/react">acebook/react</button>button>
-          <button class="example-chip" data-url="https://github.com/expressjs/express">expressjs/express</button>button>
-          <button class="example-chip" data-url="https://github.com/microsoft/vscode">microsoft/vscode</button>button>
-        </div>div>
-      </div>div>
+        <div class="quick-examples">
+          <span>Or try:</span>
+          <button class="example-chip" data-url="https://github.com/facebook/react">facebook/react</button>
+          <button class="example-chip" data-url="https://github.com/expressjs/express">expressjs/express</button>
+          <button class="example-chip" data-url="https://github.com/microsoft/vscode">microsoft/vscode</button>
+        </div>
+      </div>
+
+      <!-- Dashboard grid for home metrics/trending -->
+      <section class="home-dashboard-grid">
+        <!-- Recent Repos -->
+        <div class="glass-card recent-repos">
+          <h3>Recent Explored Repositories</h3>
+          <div class="repo-list" id="recent-repos-list">
+            <div class="repo-item" data-url="https://github.com/facebook/react">
+              <div class="repo-details">
+                <span class="repo-name">facebook/react</span>
+                <span class="repo-meta">14,200 files • JS/TS • Health Score: 88%</span>
+              </div>
+              <button class="btn-continue">Explore</button>
+            </div>
+            <div class="repo-item" data-url="https://github.com/expressjs/express">
+              <div class="repo-details">
+                <span class="repo-name">expressjs/express</span>
+                <span class="repo-meta">84 files • JS • Health Score: 92%</span>
+              </div>
+              <button class="btn-continue">Explore</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Trending repos & Live Stats -->
+        <div class="glass-card trending-repos">
+          <h3>Trending Open Source</h3>
+          <div class="trending-grid">
+            <div class="trend-item" data-url="https://github.com/facebook/react">
+              <div class="trend-rank">#1</div>
+              <div class="trend-info">
+                <h4>react</h4>
+                <p>Decluttered web interface rendering library</p>
+              </div>
+            </div>
+            <div class="trend-item" data-url="https://github.com/expressjs/express">
+              <div class="trend-rank">#2</div>
+              <div class="trend-info">
+                <h4>express</h4>
+                <p>Minimalist Node.js web server library</p>
+              </div>
+            </div>
+            <div class="trend-item" data-url="https://github.com/microsoft/vscode">
+              <div class="trend-rank">#3</div>
+              <div class="trend-info">
+                <h4>vscode</h4>
+                <p>Extensible desktop code editor workstation</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- 2. INDEXING/ANALYSIS LOADING SCREEN -->
+  <div id="loading-view" class="view">
+    <div class="loader-container">
+      <div class="spinner-galaxy">
+        <div class="orbit ring-1"></div>
+        <div class="orbit ring-2"></div>
+        <div class="orbit ring-3"></div>
+        <div class="core-star"></div>
+      </div>
+      <h2 id="loading-repo-name">Analyzing Repository...</h2>
+      <p class="loader-desc">Atlas is constructing a visual 2D topological map of the software components, function dependency lines, and historical changes.</p>
+      
+      <!-- Progress Bar Tracker -->
+      <div class="loading-progress-wrapper">
+        <div class="progress-bar-container">
+          <div class="progress-fill" id="loading-progress-bar"></div>
+        </div>
+        <div class="progress-steps">
+          <div class="step active" id="step-clone">Clone Meta</div>
+          <div class="step" id="step-ast">Build AST</div>
+          <div class="step" id="step-deps">Resolve Deps</div>
+          <div class="step" id="step-scanners">Run Scanners</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. WORKSPACE VIEW (THE CORE APPLICATION) -->
+  <div id="workspace-view" class="view">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="workspace-sidebar">
+      <div class="sidebar-header" id="sidebar-home-btn">
+        <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
+          <path d="M2 12h20"></path>
+        </svg>
+        <span class="logo-title">ATLAS</span>
+      </div>
+
+      <nav class="sidebar-nav">
+        <ul>
+          <li class="active" data-tab="overview">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="7" height="9"></rect>
+              <rect x="14" y="3" width="7" height="5"></rect>
+              <rect x="14" y="12" width="7" height="9"></rect>
+              <rect x="3" y="16" width="7" height="5"></rect>
+            </svg>
+            <span>Overview</span>
+          </li>
+          <li data-tab="architecture">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"></polygon>
+              <line x1="12" y1="22" x2="12" y2="15.5"></line>
+              <line x1="12" y1="15.5" x2="22" y2="8.5"></line>
+              <line x1="12" y1="15.5" x2="2" y2="8.5"></line>
+            </svg>
+            <span>Architecture</span>
+          </li>
+          <li data-tab="call-graph">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="18" cy="5" r="3"></circle>
+              <circle cx="6" cy="12" r="3"></circle>
+              <circle cx="18" cy="19" r="3"></circle>
+              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+              <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+            </svg>
+            <span>Call Graph</span>
+          </li>
+          <li data-tab="timeline">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <span>Git Timeline</span>
+          </li>
+          <li data-tab="scanners">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+            <span>Scanners</span>
+          </li>
+          <li data-tab="comparison">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="21" x2="18" y2="14"></line>
+              <line x1="12" y1="21" x2="12" y2="10"></line>
+              <line x1="6" y1="21" x2="6" y2="14"></line>
+              <line x1="2" y1="21" x2="22" y2="21"></line>
+              <polyline points="12 3 20 7.5 20 12.5 12 17 4 12.5 4 7.5 12 3"></polyline>
+            </svg>
+            <span>Comparison</span>
+          </li>
+          <li data-tab="settings">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="3"></circle>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+            </svg>
+            <span>Settings</span>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Sidebar Bottom: Live Metrics Panel -->
+      <div class="sidebar-metrics">
+        <h4>System Metrics</h4>
+        <div class="metrics-grid">
+          <div class="metric-box">
+            <span class="m-label">FPS</span>
+            <span class="m-val success-text" id="fps-val">60</span>
+          </div>
+          <div class="metric-box">
+            <span class="m-label">Memory</span>
+            <span class="m-val" id="mem-val">42MB</span>
+          </div>
+          <div class="metric-box">
+            <span class="m-label">Nodes</span>
+            <span class="m-val" id="nodes-val">0</span>
+          </div>
+          <div class="metric-box">
+            <span class="m-label">Edges</span>
+            <span class="m-val" id="edges-val">0</span>
+          </div>
+        </div>
+        <div class="indexing-mini">
+          <div class="ind-bar"><div class="ind-fill" style="width: 100%"></div></div>
+          <span class="ind-text">AI Indexing Completed</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Workspace Container -->
+    <main class="workspace-main">
+      
+      <!-- Top Bar: Repository Header, Search and Actions -->
+      <header class="workspace-top-bar">
+        <div class="repo-info-display">
+          <h2 id="current-repo-name">facebook/react</h2>
+          <span class="badge" id="current-repo-badge">TypeScript</span>
+        </div>
+
+        <!-- Global Search engine -->
+        <div class="nav-search-bar">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" id="global-search-input" placeholder="Search symbols, routes, DB queries... (Press 'S')" />
+          <div class="search-results-dropdown" id="search-dropdown">
+            <!-- Populated via Javascript -->
+          </div>
+        </div>
+
+        <div class="workspace-controls">
+          <!-- Learning Mode Trigger -->
+          <div class="learning-selector">
+            <label for="learning-level">Learning Mode</label>
+            <select id="learning-level">
+              <option value="beginner">Beginner</option>
+              <option value="intermediate">Intermediate</option>
+              <option value="advanced" selected>Advanced</option>
+              <option value="expert">Expert</option>
+            </select>
+          </div>
+          <button class="btn-icon" id="btn-shortcuts-info" title="Keyboard Shortcuts">
+            <span>⌨️</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Center Dynamic Content (Switched via Navigation Tab) -->
+      <div class="tab-contents-container">
+
+        <!-- TAB 1: OVERVIEW DASHBOARD -->
+        <div id="tab-overview" class="tab-panel active">
+          <div class="overview-grid">
+            <!-- Health Score Card -->
+            <div class="glass-card health-card">
+              <div class="score-ring">
+                <svg viewBox="0 0 36 36" class="circular-chart text-cyan">
+                  <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                  <path class="circle" id="health-score-path" stroke-dasharray="88, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                  <text x="18" y="20.35" class="percentage" id="health-score-text">88%</text>
+                </svg>
+              </div>
+              <div class="score-details">
+                <h3>Repository Health Score</h3>
+                <p>Aggregated security patches, package version decay, complexity density, and test coverage factors.</p>
+              </div>
+            </div>
+
+            <!-- Stats counter card -->
+            <div class="glass-card repo-stats-card">
+              <h3>Structural Summary</h3>
+              <div class="overview-stats-grid">
+                <div class="ov-stat">
+                  <span class="ov-label">Complexity</span>
+                  <span class="ov-val" id="ov-complexity">Medium</span>
+                </div>
+                <div class="ov-stat">
+                  <span class="ov-label">Total Files</span>
+                  <span class="ov-val" id="ov-files">1,428</span>
+                </div>
+                <div class="ov-stat">
+                  <span class="ov-label">Functions</span>
+                  <span class="ov-val" id="ov-functions">18,564</span>
+                </div>
+                <div class="ov-stat">
+                  <span class="ov-label">External Deps</span>
+                  <span class="ov-val" id="ov-deps">12</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Detailed Architectural Scores -->
+            <div class="glass-card scores-breakdown-card">
+              <h3>Architecture Quality Grades</h3>
+              <div class="score-bar-group">
+                <div class="score-bar-item">
+                  <div class="score-label-row">
+                    <span>Architecture Integrity</span>
+                    <span id="score-arch">92%</span>
+                  </div>
+                  <div class="s-progress"><div class="s-fill bg-blue" id="fill-arch" style="width: 92%"></div></div>
+                </div>
+                <div class="score-bar-item">
+                  <div class="score-label-row">
+                    <span>Technical Debt Score</span>
+                    <span id="score-debt" class="warning-text">78%</span>
+                  </div>
+                  <div class="s-progress"><div class="s-fill bg-amber" id="fill-debt" style="width: 78%"></div></div>
+                </div>
+                <div class="score-bar-item">
+                  <div class="score-label-row">
+                    <span>Security Rating</span>
+                    <span id="score-security">95%</span>
+                  </div>
+                  <div class="s-progress"><div class="s-fill bg-cyan" id="fill-security" style="width: 95%"></div></div>
+                </div>
+                <div class="score-bar-item">
+                  <div class="score-label-row">
+                    <span>Documentation Integrity</span>
+                    <span id="score-doc">85%</span>
+                  </div>
+                  <div class="s-progress"><div class="s-fill bg-purple" id="fill-doc" style="width: 85%"></div></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Smart Insights / Interesting Facts Card -->
+            <div class="glass-card smart-insights-card">
+              <h3>Smart Insights & Interesting Facts</h3>
+              <ul class="facts-list" id="facts-list-container">
+                <li><span>Largest Module:</span> <strong id="fact-largest-module">Renderer</strong></li>
+                <li><span>Oldest File:</span> <strong id="fact-oldest-file">index.ts</strong></li>
+                <li><span>Most Edited Function:</span> <strong id="fact-most-edited-fn">render()</strong></li>
+                <li><span>Most Connected File:</span> <strong id="fact-most-connected-file">App.tsx</strong></li>
+                <li><span>Longest Dependency Chain:</span> <strong id="fact-longest-chain">18 modules</strong></li>
+                <li><span>Largest Circular Group:</span> <strong id="fact-largest-circular">7 files</strong></li>
+              </ul>
+            </div>
+
+            <!-- Languages Breakdown -->
+            <div class="glass-card languages-card" style="grid-column: span 2;">
+              <h3>Language Distribution</h3>
+              <div class="lang-bar" id="lang-distribution-bar">
+                <!-- Javascript/Typescript fills loaded via JS -->
+              </div>
+              <ul class="lang-list" id="lang-list-legend">
+                <!-- JS legend items -->
+              </ul>
+            </div>
+          </div>
+
+          <!-- Bottom CTA to visualizer -->
+          <div class="dashboard-footer-banner glass-card">
+            <div class="banner-text">
+              <h3>Launch Code Universe Visualizer</h3>
+              <p>Pan, zoom, highlight edges, trace execution lines, and consult the AI in the visual explorer.</p>
+            </div>
+            <button class="btn-primary" id="launch-canvas-btn">Open Architecture Explorer</button>
+          </div>
+        </div>
+
+        <!-- TAB 2: GENERAL EXPLORER (ARCHITECTURE & CALL GRAPH PANEL LAYER) -->
+        <div id="tab-visualizer" class="tab-panel">
+          <div class="visualizer-container-layout">
+            
+            <!-- Center Canvas Area -->
+            <div class="canvas-visualizer-wrapper">
+              
+              <!-- Canvas Breadcrumbs and Options -->
+              <div class="canvas-floating-controls top-controls">
+                <div class="breadcrumbs" id="visualizer-breadcrumbs">
+                  <span class="crumb root-crumb">Root</span>
+                  <span class="crumb-separator">/</span>
+                  <span class="crumb current-crumb">react-reconciler</span>
+                </div>
+                
+                <div class="canvas-display-modes">
+                  <button class="mode-chip active" id="btn-mode-arch">Architecture Space</button>
+                  <button class="mode-chip" id="btn-mode-call">Call Dependency Graph</button>
+                  <button class="mode-chip text-cyan" id="btn-mode-city">Code City Mode 🌆</button>
+                </div>
+
+                <!-- Call Graph Depth slider -->
+                <div class="call-depth-slider-container" id="depth-slider-container">
+                  <span class="lbl">Depth:</span>
+                  <input type="range" id="call-depth-slider" min="1" max="4" value="4" />
+                  <span class="lbl-val" id="call-depth-value">All</span>
+                </div>
+              </div>
+
+              <!-- Interactive Visual Canvas -->
+              <canvas id="architecture-canvas"></canvas>
+
+              <!-- Floating Module Intelligence hover popups card -->
+              <div id="hover-module-card" class="glass-card hover-popup-card">
+                <!-- Loaded dynamically -->
+              </div>
+
+              <!-- Guided Walkthrough Slideshow Overlay -->
+              <div id="presentation-narration-card" class="glass-card guided-presentation-overlay">
+                <div class="pres-header">
+                  <span class="badge">Presentation Mode</span>
+                  <button class="btn-close-modal" id="btn-exit-presentation">×</button>
+                </div>
+                <div class="pres-body">
+                  <h4 id="pres-slide-title">Welcome to React</h4>
+                  <p id="pres-slide-text">Loading architectural review walkthrough sequence...</p>
+                </div>
+                <div class="pres-footer">
+                  <button class="btn-glass btn-sm" id="btn-pres-prev">← Previous</button>
+                  <div class="pres-steps-indicator" id="pres-steps-indicator-dots">
+                    <!-- Dot indicators -->
+                  </div>
+                  <button class="btn-primary btn-sm" id="btn-pres-next">Next →</button>
+                </div>
+              </div>
+
+              <!-- Floating Canvas controls (Zoom, Focus, Center) -->
+              <div class="canvas-floating-controls bottom-controls">
+                <div class="view-actions-group">
+                  <button class="btn-glass" id="btn-canvas-center" title="Center Graph (Space)">Center</button>
+                  <button class="btn-glass" id="btn-canvas-focus" title="Focus Selected (F)">Focus</button>
+                  <button class="btn-glass" id="btn-canvas-split" title="Split View">Split View</button>
+                  <button class="btn-glass bg-purple" id="btn-canvas-present" title="Launch Guided Tour (P)">Guided Presentation</button>
+                  <button class="btn-glass" id="btn-canvas-fullscreen">Fullscreen</button>
+                </div>
+
+                <!-- Heatmap options selector -->
+                <div class="heatmap-selector-group">
+                  <span class="caption">Heatmap:</span>
+                  <button class="heatmap-chip active" data-heatmap="none">Default</button>
+                  <button class="heatmap-chip" data-heatmap="complexity">Complexity</button>
+                  <button class="heatmap-chip" data-heatmap="git">Git History</button>
+                </div>
+              </div>
+
+              <!-- Color Scale Legend Drawer -->
+              <div class="canvas-legend">
+                <div class="legend-header">Complexity Legend</div>
+                <div class="legend-scale">
+                  <div class="scale-item"><span class="legend-color simple"></span> Simple</div>
+                  <div class="scale-item"><span class="legend-color medium"></span> Medium</div>
+                  <div class="scale-item"><span class="legend-color complex"></span> Complex</div>
+                  <div class="scale-item"><span class="legend-color danger"></span> Danger</div>
+                  <div class="scale-item"><span class="legend-color critical"></span> Critical</div>
+                  <div class="scale-item"><span class="legend-color legacy"></span> Legacy</div>
+                </div>
+              </div>
+
+              <!-- Mini map representation -->
+              <div class="minimap-container">
+                <canvas id="minimap-canvas"></canvas>
+                <div class="minimap-viewport-indicator" id="minimap-viewport"></div>
+              </div>
+            </div>
+
+            <!-- Right Inspector Side Pane -->
+            <aside class="visualizer-inspector-pane">
+              <div class="inspector-header">
+                <div class="title-section">
+                  <span class="file-type-badge" id="inspect-badge">FILE</span>
+                  <h3 id="inspect-title">Select a node to inspect</h3>
+                  <span class="file-meta-row" id="inspect-meta">No node selected</span>
+                </div>
+                <button class="btn-close-inspector" id="btn-close-inspect">×</button>
+              </div>
+
+              <!-- Inspector Navigation tabs -->
+              <div class="inspector-tabs">
+                <button class="ins-tab active" data-ins-tab="ai">AI Explain</button>
+                <button class="ins-tab" data-ins-tab="code">Source Code</button>
+                <button class="ins-tab" data-ins-tab="relations">References</button>
+                <button class="ins-tab" data-ins-tab="impact">Impact Assess</button>
+              </div>
+
+              <div class="inspector-tab-contents">
+                <!-- INSPECTOR SUB-TAB 1: AI EXPLAIN -->
+                <div class="ins-panel active" id="ins-panel-ai">
+                  <div class="explain-quick-prompts">
+                    <h4>Quick AI Prompts:</h4>
+                    <div class="prompt-chips">
+                      <button class="ai-chip-prompt" data-prompt="What does this do?">What does this do?</button>
+                      <button class="ai-chip-prompt" data-prompt="Why does it exist?">Why does it exist?</button>
+                      <button class="ai-chip-prompt" data-prompt="Explain like I'm 15.">Explain like I'm 15</button>
+                      <button class="ai-chip-prompt" data-prompt="Explain like a senior engineer.">Senior Engineer analysis</button>
+                      <button class="ai-chip-prompt" data-prompt="How risky is editing this?">How risky is editing this?</button>
+                    </div>
+                  </div>
+
+                  <!-- Architecture Report generation -->
+                  <div class="arch-review-trigger-card glass-card">
+                    <div class="header-row">
+                      <h4>AI Architecture Scorecard</h4>
+                      <button class="btn-primary btn-sm bg-purple" id="btn-generate-arch-report">Generate Engineering Report</button>
+                    </div>
+                    <div id="arch-report-output" class="arch-report-area">
+                      <!-- Render output dynamically -->
+                    </div>
+                  </div>
+
+                  <!-- Conversational Bot Panel -->
+                  <div class="chat-container">
+                    <div class="chat-messages" id="chat-messages-box">
+                      <div class="chat-message bot">
+                        <div class="avatar">AI</div>
+                        <div class="msg-bubble">
+                          Click any node in the architecture graph to analyze it, or select a quick prompt above to explain it dynamically.
+                        </div>
+                      </div>
+                    </div>
+                    <div class="chat-input-wrapper">
+                      <input type="text" id="chat-input-field" placeholder="Ask AI: 'Take me to Auth' or 'Show hooks'..." />
+                      <button id="chat-send-btn">Send</button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- INSPECTOR SUB-TAB 2: SOURCE CODE VIEW -->
+                <div class="ins-panel" id="ins-panel-code">
+                  <div class="code-view-container">
+                    <div class="code-view-header">
+                      <span class="code-filepath" id="code-filepath-title">src/react.js</span>
+                      <span class="code-lang">JavaScript</span>
+                    </div>
+                    <div class="code-content-block">
+                      <pre><code id="code-display-area" class="code-font">Select a file node to load the source code file visualization.</code></pre>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- INSPECTOR SUB-TAB 3: REFERENCES & DEPENDENCY EXPLORER -->
+                <div class="ins-panel" id="ins-panel-relations">
+                  <!-- Dependency scope togglers -->
+                  <div class="dep-toggles-card glass-card">
+                    <h5>Scope Filters</h5>
+                    <div class="toggles-grid">
+                      <label><input type="checkbox" id="dep-toggle-direct" checked /> Direct</label>
+                      <label><input type="checkbox" id="dep-toggle-transitive" checked /> Transitive</label>
+                      <label><input type="checkbox" id="dep-toggle-internal" checked /> Internal Modules</label>
+                      <label><input type="checkbox" id="dep-toggle-external" /> External Packages</label>
+                    </div>
+                    <div class="dep-metrics-row">
+                      <div class="m-chip">Radius: <strong id="dep-metric-radius">N/A</strong></div>
+                      <div class="m-chip">Depth: <strong id="dep-metric-depth">N/A</strong></div>
+                      <div class="m-chip">Shared: <strong id="dep-metric-shared">No</strong></div>
+                    </div>
+                  </div>
+
+                  <div class="relations-container">
+                    <div class="rel-section">
+                      <h4>Incoming Dependencies (Depends on this)</h4>
+                      <ul class="rel-list" id="relations-incoming-list">
+                        <li><span class="empty-text">No selected symbol node</span></li>
+                      </ul>
+                    </div>
+                    <div class="rel-section">
+                      <h4>Outgoing Dependencies (This imports/calls)</h4>
+                      <ul class="rel-list" id="relations-outgoing-list">
+                        <li><span class="empty-text">No selected symbol node</span></li>
+                      </ul>
+                    </div>
+                    <div class="rel-section">
+                      <h4>Highly Related Co-changed Files</h4>
+                      <ul class="rel-list" id="relations-cochanges-list">
+                        <li><span class="empty-text">No selected symbol node</span></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- INSPECTOR SUB-TAB 4: IMPACT SIMULATOR -->
+                <div class="ins-panel" id="ins-panel-impact">
+                  <div class="impact-simulator-container">
+                    <div class="glass-card impact-assessment-card">
+                      <h4>Impact & Change Risk Predictor</h4>
+                      <p class="desc">Atlas predicts downstream ripple effects across compiling dependencies, components and tests before you modify this file.</p>
+                      
+                      <div class="impact-stats">
+                        <div class="impact-stat-item">
+                          <span class="num" id="impact-val-files">17</span>
+                          <span class="lbl">Affected Files</span>
+                        </div>
+                        <div class="impact-stat-item">
+                          <span class="num" id="impact-val-endpoints">4</span>
+                          <span class="lbl">API Routes</span>
+                        </div>
+                        <div class="impact-stat-item">
+                          <span class="num" id="impact-val-components">9</span>
+                          <span class="lbl">Components</span>
+                        </div>
+                        <div class="impact-stat-item">
+                          <span class="num" id="impact-val-tests">31</span>
+                          <span class="lbl">Unit Tests</span>
+                        </div>
+                      </div>
+
+                      <div class="impact-score-item">
+                        <div class="score-lbl-row">
+                          <span>Estimated Change Risk</span>
+                          <strong id="impact-risk-score">82%</strong>
+                        </div>
+                        <div class="s-progress"><div class="s-fill bg-red" id="impact-risk-fill" style="width: 82%"></div></div>
+                      </div>
+
+                      <div class="impact-score-item">
+                        <div class="score-lbl-row">
+                          <span>Breaking Change Probability</span>
+                          <strong class="danger-text" id="impact-breaking-text">High</strong>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="glass-card impact-list-card">
+                      <h5>Predicted High Risk Breakages</h5>
+                      <ul class="risk-files-list" id="impact-breakages-list">
+                        <!-- Loaded dynamically -->
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </aside>
+          </div>
+
+          <!-- Bottom Overlay: Dynamic Dock (Git Timeline scrubber & Simulator) -->
+          <div class="workspace-bottom-dock">
+            <div class="dock-headers">
+              <button class="dock-header-tab active" data-dock-tab="simulator">Runtime Simulator</button>
+              <button class="dock-header-tab" data-dock-tab="git- scrubber">Git Time Machine</button>
+            </div>
+            
+            <div class="dock-panels">
+              <!-- DOCK SUB-PANEL 1: RUNTIME SIMULATOR -->
+              <div class="dock-panel active" id="dock-panel-simulator">
+                <div class="simulator-layout">
+                  <!-- Simulation selector -->
+                  <div class="sim-selector-pane">
+                    <h4>Select Trigger Event:</h4>
+                    <div class="sim-cards" id="sim-cards-list">
+                      <!-- Sim triggers loaded via JS -->
+                    </div>
+                  </div>
+
+                  <!-- Live execution console / Stack -->
+                  <div class="sim-execution-log">
+                    <h4>Stack Visualizer & execution steps</h4>
+                    <div class="sim-steps-wrapper" id="sim-steps-wrapper">
+                      <div class="empty-text">Select a trigger event and click "Simulate Runtime Call Path"</div>
+                    </div>
+                  </div>
+
+                  <!-- Live metrics graphics (Charts) -->
+                  <div class="sim-live-metrics-graphs">
+                    <div class="sim-metrics-header">
+                      <h4>Simulated Server Resources</h4>
+                      <button class="btn-primary btn-sm" id="btn-run-simulation">Simulate Runtime Call Path</button>
+                    </div>
+                    <div class="chart-canvas-wrapper">
+                      <!-- Small custom CSS bars representing CPU/Memory allocation -->
+                      <div class="sim-chart-item">
+                        <div class="chart-label">Live CPU Load</div>
+                        <div class="chart-bar-container"><div class="chart-bar-fill" id="sim-cpu-fill" style="width: 2%"></div></div>
+                        <div class="chart-value" id="sim-cpu-text">2% CPU</div>
+                      </div>
+                      <div class="sim-chart-item">
+                        <div class="chart-label">Memory Usage</div>
+                        <div class="chart-bar-container"><div class="chart-bar-fill" id="sim-mem-fill" style="width: 10%"></div></div>
+                        <div class="chart-value" id="sim-mem-text">14.2 MB</div>
+                      </div>
+                      <div class="sim-chart-item">
+                        <div class="chart-label">Total Execution Delay</div>
+                        <div class="chart-bar-container"><div class="chart-bar-fill" id="sim-delay-fill" style="width: 0%"></div></div>
+                        <div class="chart-value" id="sim-delay-text">0 ms</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- DOCK SUB-PANEL 2: GIT TIME MACHINE SCRUBBER -->
+              <div class="dock-panel" id="dock-panel-git-scrubber">
+                <div class="git-scrubber-layout">
+                  <div class="timeline-controls-row">
+                    <button class="btn-primary btn-sm" id="btn-git-replay">Play Evolution Replay</button>
+                    <div class="timeline-slider-wrapper">
+                      <input type="range" id="git-slider" min="0" max="5" value="5" step="1" />
+                      <div class="slider-marks" id="git-slider-marks">
+                        <!-- Loaded dynamically -->
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="commit-detail-card glass-card">
+                    <div class="commit-meta-row">
+                      <span class="commit-hash" id="commit-hash-val">8a1b24d</span>
+                      <span class="commit-author" id="commit-author-val">Dan Abramov</span>
+                      <span class="commit-date" id="commit-date-val">2024-12-05</span>
+                    </div>
+                    <p class="commit-message" id="commit-msg-val">Release Hooks mechanism in react reconciler framework</p>
+                    <div class="commit-changes-row">
+                      <span class="changes-added" id="commit-added-val">+2 files added</span>
+                      <span class="changes-removed" id="commit-removed-val">-0 files removed</span>
+                    </div>
+                  </div>
+
+                  <div class="compare-diff-box">
+                    <h4>Compare Branches / Commits:</h4>
+                    <div class="select-row">
+                      <select id="diff-branch-a">
+                        <option value="main">main (v19.0)</option>
+                        <option value="v18">v18.0.0</option>
+                        <option value="v16">v16.0.0</option>
+                      </select>
+                      <span>VS</span>
+                      <select id="diff-branch-b">
+                        <option value="v18" selected>v18.0.0</option>
+                        <option value="v16">v16.0.0</option>
+                        <option value="v15">v15.0.0</option>
+                      </select>
+                      <button class="btn-glass btn-sm" id="btn-run-diff">Compare Architecture</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- TAB 3: SCANNERS -->
+        <div id="tab-scanners" class="tab-panel">
+          <div class="scanners-view-layout">
+            <div class="scanners-sidebar-tabs">
+              <button class="sc-tab active" data-sc-panel="tech-debt">Technical Debt Scanner</button>
+              <button class="sc-tab" data-sc-panel="security">Security Vulnerabilities</button>
+              <button class="sc-tab" data-sc-panel="performance">Performance Bottlenecks</button>
+            </div>
+
+            <div class="scanners-panels-container">
+              <!-- SCANNER SUB-PANEL 1: TECH DEBT -->
+              <div class="scanner-sub-panel active" id="scanner-panel-tech-debt">
+                <div class="panel-header-row">
+                  <h3>Technical Debt & Code Smells</h3>
+                  <span class="stat-bubble red" id="techdebt-count-badge">3 Alerts</span>
+                </div>
+                <div class="alerts-table-wrapper">
+                  <table class="alerts-table">
+                    <thead>
+                      <tr>
+                        <th>Smell Type</th>
+                        <th>File / Module</th>
+                        <th>Severity</th>
+                        <th>Description</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody id="tech-debt-table-body">
+                      <!-- Loaded dynamically -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <!-- SCANNER SUB-PANEL 2: SECURITY -->
+              <div class="scanner-sub-panel" id="scanner-panel-security">
+                <div class="panel-header-row">
+                  <h3>Security Vulnerability Alerts</h3>
+                  <span class="stat-bubble orange" id="security-count-badge">2 Alerts</span>
+                </div>
+                <div class="alerts-table-wrapper">
+                  <table class="alerts-table">
+                    <thead>
+                      <tr>
+                        <th>Issue Category</th>
+                        <th>File Location</th>
+                        <th>Severity</th>
+                        <th>Risk Assessment</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody id="security-table-body">
+                      <!-- Loaded dynamically -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <!-- SCANNER SUB-PANEL 3: PERFORMANCE -->
+              <div class="scanner-sub-panel" id="scanner-panel-performance">
+                <div class="panel-header-row">
+                  <h3>Performance and Bundle Sizes</h3>
+                  <span class="stat-bubble yellow" id="performance-count-badge">2 Alerts</span>
+                </div>
+                <div class="alerts-table-wrapper">
+                  <table class="alerts-table">
+                    <thead>
+                      <tr>
+                        <th>Performance Issue</th>
+                        <th>File Location</th>
+                        <th>Impact Severity</th>
+                        <th>Optimization Advice</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody id="performance-table-body">
+                      <!-- Loaded dynamically -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 4: ARCHITECTURE COMPARISON -->
+        <div id="tab-comparison" class="tab-panel">
+          <div class="settings-view-layout">
+            <div class="glass-card comparison-controls-card">
+              <h3>Repository Comparison Workspace</h3>
+              <p class="desc">Select two repository visuals to evaluate modular structure, coupling, complexity, and technical debt distributions side-by-side.</p>
+              
+              <div class="comp-select-row">
+                <div class="comp-select-item">
+                  <label for="comp-repo-a">Repository A</label>
+                  <select id="comp-repo-a">
+                    <option value="github.com/facebook/react" selected>React (v19.0.0)</option>
+                    <option value="github.com/expressjs/express">Express.js (v4.18.2)</option>
+                    <option value="github.com/microsoft/vscode">VS Code (v1.85.0)</option>
+                  </select>
+                </div>
+                <span class="vs-txt">VS</span>
+                <div class="comp-select-item">
+                  <label for="comp-repo-b">Repository B</label>
+                  <select id="comp-repo-b">
+                    <option value="github.com/facebook/react">React (v19.0.0)</option>
+                    <option value="github.com/expressjs/express" selected>Express.js (v4.18.2)</option>
+                    <option value="github.com/microsoft/vscode">VS Code (v1.85.0)</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Comparison Metric Bar Graphs -->
+            <div class="glass-card comparison-graphs-card">
+              <h3>Modularity & Quality Benchmarks</h3>
+              
+              <div class="comparison-bar-grid">
+                <!-- 1. Complexity -->
+                <div class="comp-metric-bar-item">
+                  <div class="score-label-row">
+                    <span>Complexity Grade (Lower = Better)</span>
+                    <span>A: <strong class="text-cyan" id="comp-a-val-complexity">45%</strong> vs B: <strong class="text-purple" id="comp-b-val-complexity">25%</strong></span>
+                  </div>
+                  <div class="double-progress-bar">
+                    <div class="s-progress"><div class="s-fill bg-cyan" id="comp-a-bar-complexity" style="width: 45%"></div></div>
+                    <div class="s-progress"><div class="s-fill bg-purple" id="comp-b-bar-complexity" style="width: 25%"></div></div>
+                  </div>
+                </div>
+
+                <!-- 2. Coupling -->
+                <div class="comp-metric-bar-item">
+                  <div class="score-label-row">
+                    <span>Cohesion & Coupling Rating</span>
+                    <span>A: <strong class="text-cyan" id="comp-a-val-coupling">92%</strong> vs B: <strong class="text-purple" id="comp-b-val-coupling">88%</strong></span>
+                  </div>
+                  <div class="double-progress-bar">
+                    <div class="s-progress"><div class="s-fill bg-cyan" id="comp-a-bar-coupling" style="width: 92%"></div></div>
+                    <div class="s-progress"><div class="s-fill bg-purple" id="comp-b-bar-coupling" style="width: 88%"></div></div>
+                  </div>
+                </div>
+
+                <!-- 3. Dependency Density -->
+                <div class="comp-metric-bar-item">
+                  <div class="score-label-row">
+                    <span>Dependency Density (Imports count ratio)</span>
+                    <span>A: <strong class="text-cyan" id="comp-a-val-density">12%</strong> vs B: <strong class="text-purple" id="comp-b-val-density">32%</strong></span>
+                  </div>
+                  <div class="double-progress-bar">
+                    <div class="s-progress"><div class="s-fill bg-cyan" id="comp-a-bar-density" style="width: 12%"></div></div>
+                    <div class="s-progress"><div class="s-fill bg-purple" id="comp-b-bar-density" style="width: 32%"></div></div>
+                  </div>
+                </div>
+
+                <!-- 4. Maintainability -->
+                <div class="comp-metric-bar-item">
+                  <div class="score-label-row">
+                    <span>Maintainability Index Score</span>
+                    <span>A: <strong class="text-cyan" id="comp-a-val-maintainability">89%</strong> vs B: <strong class="text-purple" id="comp-b-val-maintainability">91%</strong></span>
+                  </div>
+                  <div class="double-progress-bar">
+                    <div class="s-progress"><div class="s-fill bg-cyan" id="comp-a-bar-maintainability" style="width: 89%"></div></div>
+                    <div class="s-progress"><div class="s-fill bg-purple" id="comp-b-bar-maintainability" style="width: 91%"></div></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- General review comparison -->
+              <div class="comp-narrative-summary" id="comp-summary-text">
+                React features a highly decoupled core, but carries a higher internal complexity rating due to concurrent WorkLoops. Express.js exhibits minimal complexity but slightly higher dependency coupling values due to legacy Node middleware bindings.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 5: SETTINGS -->
+        <div id="tab-settings" class="tab-panel">
+          <div class="settings-view-layout">
+            <div class="glass-card settings-card">
+              <h3>Visual Graph Rendering Settings</h3>
+              <div class="setting-row">
+                <div class="set-info">
+                  <span class="set-title">Physics Simulation Speed</span>
+                  <span class="set-desc">Controls the spring and node repulsion layout speed.</span>
+                </div>
+                <input type="range" id="setting-physics-speed" min="1" max="10" value="5" />
+              </div>
+              <div class="setting-row">
+                <div class="set-info">
+                  <span class="set-title">Enable Edge Bundling</span>
+                  <span class="set-desc">Groups adjacent dependency lines to reduce graph clutter.</span>
+                </div>
+                <label class="switch">
+                  <input type="checkbox" id="setting-edge-bundling" checked />
+                  <span class="slider-round"></span>
+                </label>
+              </div>
+              <div class="setting-row">
+                <div class="set-info">
+                  <span class="set-title">Particle Density (Flow Execution)</span>
+                  <span class="set-desc">Determines flow particles count during call-trace simulations.</span>
+                </div>
+                <select id="setting-particle-density">
+                  <option value="low">Low Density</option>
+                  <option value="medium" selected>Standard Particles</option>
+                  <option value="high">High Velocity Flow</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="glass-card settings-card">
+              <h3>System and AI Settings</h3>
+              <div class="setting-row">
+                <div class="set-info">
+                  <span class="set-title">AI Provider Endpoint</span>
+                  <span class="set-desc">Directs code-understanding queries to specialized models.</span>
+                </div>
+                <select>
+                  <option>Gemini 3.5 Flash (Default)</option>
+                  <option>Gemini 3.5 Pro (Deep Code Reasoning)</option>
+                  <option>Local Workspace AST Engine</option>
+                </select>
+              </div>
+              <div class="setting-row">
+                <div class="set-info">
+                  <span class="set-title">Index Cache Retention</span>
+                  <span class="set-desc">Retain code dependency indexes locally on device.</span>
+                </div>
+                <button class="btn-glass btn-sm" onclick="alert('Index cleared!')">Clear Local Index Cache</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- 4. KEYBOARD SHORTCUTS MODAL DIALOG -->
+  <div id="shortcuts-modal" class="modal-overlay">
+    <div class="glass-card modal-content">
+      <div class="modal-header">
+        <h3>Atlas Keyboard Shortcuts</h3>
+        <button class="btn-close-modal" id="btn-close-modal">×</button>
+      </div>
+      <div class="modal-body">
+        <ul class="shortcuts-list">
+          <li><kbd>Space</kbd> <span>Center the active Graph</span></li>
+          <li><kbd>F</kbd> <span>Focus view on the selected component node</span></li>
+          <li><kbd>A</kbd> <span>Open AI Explain console & focus chatbot input</span></li>
+          <li><kbd>G</kbd> <span>Toggle Git Time Machine scrubber panel</span></li>
+          <li><kbd>R</kbd> <span>Play/Pause Git History Morph replay</span></li>
+          <li><kbd>S</kbd> <span>Focus global Search field</span></li>
+          <li><kbd>P</kbd> <span>Launch Guided Walkthrough Tour (Presentation Mode)</span></li>
+          <li><kbd>Esc</kbd> <span>Exit overlays / close panels / quit Presentation Mode</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Load Modules -->
+  <script src="data.js"></script>
+  <script src="graph.js"></script>
+  <script src="simulator.js"></script>
+  <script src="gitmachine.js"></script>
+  <script src="scanners.js"></script>
+  <script src="ai.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
